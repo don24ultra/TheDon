@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VAGUE THEDON — L'essentiel doré</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#000;--noir-doux:#0a0a0a;--noir-profond:#050505;--or:#c9a35c;--or-clair:#e8c987;--or-fonce:#8a6b34;--ivoire:#f5efe4;--gris:#5a544a}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--noir);color:var(--ivoire);font-family:'Inter Tight',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.6}
+.ticker{background:var(--noir-profond);border-bottom:1px solid rgba(201,163,92,.15);padding:10px 0;overflow:hidden;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--or);position:fixed;top:0;left:0;right:0;z-index:101}
+.ticker-track{display:flex;gap:80px;white-space:nowrap;animation:ticker 40s linear infinite;width:max-content}
+.ticker span{display:flex;align-items:center;gap:12px}
+.ticker .dot{color:var(--or-fonce)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+nav{position:fixed;top:33px;left:0;right:0;z-index:100;padding:22px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.75);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,163,92,.1)}
+.brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;letter-spacing:.3em;color:var(--ivoire);display:flex;align-items:center;gap:14px;cursor:pointer}
+.brand-logo{width:44px;height:24px}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{color:var(--ivoire);text-decoration:none;font-size:11px;letter-spacing:.3em;text-transform:uppercase;transition:color .3s;position:relative;cursor:pointer}
+.nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:1px;background:var(--or);transition:width .4s ease}
+.nav-links a:hover{color:var(--or-clair)}
+.nav-links a:hover::after{width:100%}
+.nav-actions{display:flex;gap:20px;align-items:center}
+.icon-btn{background:none;border:none;color:var(--ivoire);cursor:pointer;font-size:11px;letter-spacing:.2em;text-transform:uppercase;transition:color .3s;display:flex;align-items:center;gap:8px;padding:0;font-family:inherit}
+.icon-btn:hover{color:var(--or-clair)}
+.icon-btn.admin{color:var(--or)}
+.icon-btn.admin:hover{color:var(--or-clair)}
+.cart-count{background:var(--or);color:var(--noir);min-width:18px;height:18px;padding:0 5px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:600}
+.user-pill{display:flex;align-items:center;gap:10px;padding:6px 12px;border:1px solid rgba(201,163,92,.25);font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+.user-pill .pill-name{color:var(--ivoire)}
+.user-pill .pill-logout{color:rgba(245,239,228,.4);cursor:pointer;font-size:14px;line-height:1}
+.user-pill .pill-logout:hover{color:var(--or)}
+.hero{min-height:100vh;padding:180px 60px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:50%;right:20%;transform:translate(0,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(201,163,92,.1) 0%,transparent 60%);pointer-events:none;animation:pulse 8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.6;transform:translate(0,-50%) scale(1)}50%{opacity:1;transform:translate(0,-50%) scale(1.15)}}
+.hero-text{position:relative;z-index:2}
+.eyebrow{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--or);margin-bottom:32px;display:flex;align-items:center;gap:16px}
+.eyebrow::before{content:'';width:40px;height:1px;background:var(--or)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,7.5vw,110px);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:36px;color:var(--ivoire)}
+.hero h1 .accent{font-style:italic;color:var(--or);font-weight:400}
+.hero h1 .vague-deco{display:inline-block;width:80px;height:30px;vertical-align:middle;margin:0 8px}
+.hero-desc{font-size:16px;color:rgba(245,239,228,.65);max-width:480px;margin-bottom:48px;line-height:1.8;font-weight:300}
+.price-row{display:flex;align-items:baseline;gap:20px;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid rgba(201,163,92,.2)}
+.price{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:400;color:var(--or);line-height:1}
+.price-label{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris)}
+.size-row{margin-bottom:36px}
+.size-label{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,239,228,.5);margin-bottom:16px;display:block}
+.sizes{display:flex;gap:10px;flex-wrap:wrap}
+.size-btn{background:transparent;border:1px solid rgba(201,163,92,.25);color:var(--ivoire);padding:14px 22px;font-family:inherit;font-size:13px;letter-spacing:.15em;cursor:pointer;transition:all .3s}
+.size-btn:hover{border-color:var(--or);color:var(--or-clair)}
+.size-btn.active{background:var(--or);border-color:var(--or);color:var(--noir);font-weight:500}
+.cta-row{display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{background:var(--or);color:var(--noir);border:none;padding:20px 48px;font-family:inherit;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:all .4s;position:relative;overflow:hidden}
+.btn-primary::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:left .6s}
+.btn-primary:hover{background:var(--or-clair);transform:translateY(-2px);box-shadow:0 14px 40px rgba(201,163,92,.3)}
+.btn-primary:hover::before{left:100%}
+.btn-primary:disabled{opacity:.6;cursor:wait}
+.btn-secondary{background:transparent;color:var(--ivoire);border:1px solid rgba(245,239,228,.2);padding:20px 36px;font-family:inherit;font-size:11px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.btn-secondary:hover{border-color:var(--or);color:var(--or-clair)}
+.hero-image{position:relative;z-index:2}
+.product-display{position:relative;aspect-ratio:1;background:radial-gradient(ellipse at center,rgba(201,163,92,.08) 0%,transparent 70%)}
+.product-display svg{width:100%;height:100%;filter:drop-shadow(0 30px 60px rgba(0,0,0,.6));animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.badge{position:absolute;top:30px;right:0;background:var(--or);color:var(--noir);padding:14px 22px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;transform:rotate(8deg);z-index:3}
+.badge::before{content:'';position:absolute;inset:4px;border:1px solid var(--noir);pointer-events:none}
+.corner-deco{position:absolute;width:60px;height:60px;border-color:var(--or);pointer-events:none;opacity:.5}
+.corner-tl{top:130px;left:40px;border-top:1px solid;border-left:1px solid}
+.corner-tr{top:130px;right:40px;border-top:1px solid;border-right:1px solid}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,72px);font-weight:300;line-height:1.1;letter-spacing:-.01em;margin-bottom:24px}
+.section-title .italic{font-style:italic;color:var(--or)}
+.section-eyebrow{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--or);margin-bottom:24px}
+.details{padding:140px 60px;background:var(--noir-doux);position:relative;overflow:hidden}
+.details::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(to bottom,transparent,var(--or))}
+.details-grid{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.feature-list{list-style:none;margin-top:48px}
+.feature-list li{padding:24px 0;border-bottom:1px solid rgba(201,163,92,.12);display:flex;align-items:flex-start;gap:20px}
+.feature-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-style:italic;color:var(--or);line-height:1;min-width:44px}
+.feature-content h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;margin-bottom:6px;color:var(--ivoire)}
+.feature-content p{color:rgba(245,239,228,.6);font-size:14px;line-height:1.6}
+.detail-image{position:relative;aspect-ratio:4/5;background:linear-gradient(135deg,rgba(201,163,92,.05),rgba(0,0,0,.5));border:1px solid rgba(201,163,92,.15);overflow:hidden}
+.detail-image svg{width:100%;height:100%;object-fit:contain}
+.detail-image .label{position:absolute;bottom:24px;left:24px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--or)}
+.detail-image .label::before{content:'— '}
+.story{padding:140px 60px;background:var(--noir-profond);text-align:center;position:relative}
+.story-content{max-width:800px;margin:0 auto}
+.story-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(28px,3.5vw,44px);font-weight:300;line-height:1.4;color:var(--ivoire);margin-bottom:40px;position:relative}
+.story-quote::before,.story-quote::after{content:'"';color:var(--or);font-size:80px;position:absolute;line-height:0;opacity:.4}
+.story-quote::before{top:20px;left:-40px}
+.story-quote::after{bottom:-10px;right:-40px}
+.story-author{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--or)}
+.story-author::before{content:'— '}
+footer{background:var(--noir-profond);padding:80px 60px 40px;border-top:1px solid rgba(201,163,92,.15)}
+.footer-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:32px;letter-spacing:.25em;margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.footer-tag{color:rgba(245,239,228,.5);font-size:14px;max-width:320px;line-height:1.7;margin-bottom:32px}
+.footer-col h4{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--or);margin-bottom:24px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:12px}
+.footer-col a{color:rgba(245,239,228,.6);text-decoration:none;font-size:14px;transition:color .3s}
+.footer-col a:hover{color:var(--or-clair)}
+.footer-bottom{max-width:1400px;margin:0 auto;padding-top:32px;border-top:1px solid rgba(201,163,92,.1);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(245,239,228,.4);letter-spacing:.1em}
+.cart-drawer{position:fixed;top:0;right:-480px;width:480px;max-width:100vw;height:100vh;background:var(--noir-doux);border-left:1px solid rgba(201,163,92,.2);z-index:200;padding:40px;transition:right .5s cubic-bezier(.7,0,.3,1);display:flex;flex-direction:column}
+.cart-drawer.open{right:0}
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .4s;z-index:199}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid rgba(201,163,92,.15)}
+.cart-header h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;letter-spacing:.1em}
+.close-btn{background:none;border:none;color:var(--ivoire);font-size:24px;cursor:pointer;transition:color .3s}
+.close-btn:hover{color:var(--or)}
+.cart-items{flex:1;overflow-y:auto}
+.cart-empty{text-align:center;padding:60px 0;color:rgba(245,239,228,.4);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:18px}
+.cart-item{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid rgba(201,163,92,.1)}
+.cart-item-img{width:80px;height:80px;background:var(--noir);border:1px solid rgba(201,163,92,.15);flex-shrink:0}
+.cart-item-info{flex:1}
+.cart-item-info h4{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;margin-bottom:4px}
+.cart-item-info .meta{font-size:12px;color:rgba(245,239,228,.5);letter-spacing:.1em;margin-bottom:8px}
+.cart-item-info .price{font-family:'Cormorant Garamond',serif;color:var(--or);font-size:18px}
+.remove-item{background:none;border:none;color:rgba(245,239,228,.4);cursor:pointer;font-size:11px;letter-spacing:.2em;text-transform:uppercase;align-self:flex-start;transition:color .3s}
+.remove-item:hover{color:var(--or)}
+.cart-footer{padding-top:24px;border-top:1px solid rgba(201,163,92,.2)}
+.cart-total{display:flex;justify-content:space-between;margin-bottom:24px;font-size:16px}
+.cart-total .total-amount{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--or)}
+.checkout-btn{width:100%;background:var(--or);color:var(--noir);border:none;padding:20px;font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:background .3s}
+.checkout-btn:hover{background:var(--or-clair)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:60px 24px;overflow-y:auto}
+.modal-overlay.open{display:flex}
+.modal{background:var(--noir-doux);border:1px solid rgba(201,163,92,.25);width:100%;max-width:640px;padding:50px;position:relative}
+.modal.small{max-width:440px}
+.modal-close{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--ivoire);font-size:22px;cursor:pointer;transition:color .3s;z-index:5}
+.modal-close:hover{color:var(--or)}
+.modal h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;margin-bottom:6px}
+.modal h2 .italic{font-style:italic;color:var(--or)}
+.modal-sub{color:rgba(245,239,228,.55);font-size:13px;margin-bottom:36px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--or)}
+.form-input,.form-select{background:transparent;border:1px solid rgba(201,163,92,.25);color:var(--ivoire);padding:14px 16px;font-family:inherit;font-size:14px;outline:none;transition:border-color .3s}
+.form-input:focus,.form-select:focus{border-color:var(--or)}
+.form-input::placeholder{color:rgba(245,239,228,.3)}
+.form-select{cursor:pointer}
+.form-select option{background:var(--noir-doux);color:var(--ivoire)}
+.order-summary{margin:32px 0;padding:20px;border:1px solid rgba(201,163,92,.15);background:rgba(0,0,0,.4)}
+.order-summary-row{display:flex;justify-content:space-between;padding:6px 0;font-size:14px}
+.order-summary-row.total{margin-top:12px;padding-top:12px;border-top:1px solid rgba(201,163,92,.2);font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--or)}
+.submit-order{width:100%;background:var(--or);color:var(--noir);border:none;padding:22px;font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:background .3s;margin-top:8px}
+.submit-order:hover{background:var(--or-clair)}
+.submit-order:disabled{opacity:.6;cursor:wait}
+.confirmation{text-align:center;padding:20px 0}
+.confirmation-icon{width:80px;height:80px;margin:0 auto 24px;border:1px solid var(--or);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--or);font-size:32px}
+.confirmation h2{margin-bottom:16px}
+.confirmation p{color:rgba(245,239,228,.7);margin-bottom:12px}
+.order-num{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--or);font-size:22px;margin:24px 0}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--or);color:var(--noir);padding:16px 32px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;z-index:400;transition:transform .4s;max-width:90vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.auth-tabs{display:flex;gap:0;margin-bottom:32px;border-bottom:1px solid rgba(201,163,92,.15)}
+.auth-tab{flex:1;background:none;border:none;color:rgba(245,239,228,.5);padding:14px;font-family:inherit;font-size:11px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:all .3s;border-bottom:2px solid transparent;margin-bottom:-1px}
+.auth-tab.active{color:var(--or);border-bottom-color:var(--or)}
+.auth-error{color:#d96565;font-size:12px;text-align:center;min-height:18px;letter-spacing:.05em;margin-top:8px}
+.admin-modal-note{font-size:11px;color:rgba(245,239,228,.4);text-align:center;margin-top:14px;letter-spacing:.1em}
+.admin-panel{position:fixed;inset:0;background:var(--noir);z-index:500;display:none;flex-direction:column;overflow-y:auto}
+.admin-panel.open{display:flex}
+.admin-header{position:sticky;top:0;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,163,92,.2);padding:24px 60px;display:flex;justify-content:space-between;align-items:center;z-index:10;flex-wrap:wrap;gap:12px}
+.admin-header-left{display:flex;align-items:center;gap:20px}
+.admin-badge{background:var(--or);color:var(--noir);padding:6px 14px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;font-weight:700}
+.admin-title{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.2em;color:var(--ivoire)}
+.admin-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.admin-btn{background:transparent;border:1px solid rgba(201,163,92,.3);color:var(--ivoire);padding:10px 20px;font-family:inherit;font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.admin-btn:hover{border-color:var(--or);color:var(--or-clair)}
+.admin-content{padding:50px 60px;flex:1;max-width:1400px;margin:0 auto;width:100%}
+.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:50px}
+.stat-card{background:var(--noir-doux);border:1px solid rgba(201,163,92,.15);padding:28px}
+.stat-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,239,228,.5);margin-bottom:12px}
+.stat-value{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:400;color:var(--or);line-height:1}
+.stat-suffix{font-size:14px;color:rgba(245,239,228,.5);margin-left:6px}
+.admin-section{margin-bottom:50px}
+.admin-section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(201,163,92,.15);flex-wrap:wrap;gap:16px}
+.admin-section-header h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300}
+.admin-section-header h3 .italic{font-style:italic;color:var(--or)}
+.search-box{background:transparent;border:1px solid rgba(201,163,92,.25);color:var(--ivoire);padding:10px 14px;font-family:inherit;font-size:13px;outline:none;width:280px;max-width:100%;transition:border-color .3s}
+.search-box:focus{border-color:var(--or)}
+.search-box::placeholder{color:rgba(245,239,228,.3)}
+.orders-empty{text-align:center;padding:80px 20px;color:rgba(245,239,228,.4);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:20px;border:1px dashed rgba(201,163,92,.2)}
+.order-card{background:var(--noir-doux);border:1px solid rgba(201,163,92,.15);padding:28px;margin-bottom:16px;transition:border-color .3s}
+.order-card:hover{border-color:rgba(201,163,92,.4)}
+.order-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(201,163,92,.1);gap:20px;flex-wrap:wrap}
+.order-id{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--or);font-style:italic}
+.order-date{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,239,228,.5)}
+.order-total{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--or)}
+.order-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px}
+.order-info-block h4{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--or);margin-bottom:12px}
+.order-info-block p{font-size:14px;line-height:1.7;color:rgba(245,239,228,.85)}
+.order-info-block p strong{color:var(--ivoire);font-weight:500}
+.order-info-block a{color:var(--or-clair);text-decoration:none}
+.order-info-block a:hover{color:var(--or)}
+.order-actions{display:flex;gap:10px;margin-top:20px;padding-top:20px;border-top:1px solid rgba(201,163,92,.1);flex-wrap:wrap}
+.order-action-btn{background:transparent;border:1px solid rgba(201,163,92,.25);color:var(--ivoire);padding:8px 16px;font-family:inherit;font-size:10px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.order-action-btn:hover{border-color:var(--or);color:var(--or-clair)}
+.order-action-btn.danger:hover{border-color:#d96565;color:#d96565}
+.users-table{width:100%;border-collapse:collapse;background:var(--noir-doux);border:1px solid rgba(201,163,92,.15)}
+.users-table th{text-align:left;padding:16px 20px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--or);border-bottom:1px solid rgba(201,163,92,.2);background:rgba(0,0,0,.3)}
+.users-table td{padding:14px 20px;border-bottom:1px solid rgba(201,163,92,.08);font-size:14px;color:rgba(245,239,228,.85)}
+.users-table tr:last-child td{border-bottom:none}
+.users-table tr:hover{background:rgba(201,163,92,.03)}
+@media (max-width:900px){
+nav{padding:18px 24px}
+.nav-links{display:none}
+.hero{grid-template-columns:1fr;padding:160px 24px 60px;gap:40px}
+.corner-deco{display:none}
+.details{padding:80px 24px}
+.details-grid{grid-template-columns:1fr;gap:40px}
+.story{padding:80px 24px}
+.story-quote::before,.story-quote::after{display:none}
+footer{padding:60px 24px 30px}
+.footer-grid{grid-template-columns:1fr;gap:40px}
+.footer-bottom{flex-direction:column;gap:12px;text-align:center}
+.brand{font-size:18px;letter-spacing:.2em}
+.brand-logo{width:32px;height:18px}
+.user-pill .pill-name{display:none}
+.modal{padding:30px 24px}
+.form-grid{grid-template-columns:1fr}
+.admin-header{padding:18px 20px}
+.admin-content{padding:30px 20px}
+.admin-stats{grid-template-columns:repeat(2,1fr)}
+.order-grid{grid-template-columns:1fr}
+.admin-title{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Livraison offerte</span><span class="dot">◆</span>
+    <span>Édition limitée</span><span class="dot">◆</span>
+    <span>Coton biologique premium</span><span class="dot">◆</span>
+    <span>Brodé à la main en France</span><span class="dot">◆</span>
+    <span>Livraison offerte</span><span class="dot">◆</span>
+    <span>Édition limitée</span><span class="dot">◆</span>
+    <span>Coton biologique premium</span><span class="dot">◆</span>
+    <span>Brodé à la main en France</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<nav>
+  <div class="brand">
+    <svg class="brand-logo" viewBox="0 0 60 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 14 Q12 4, 24 12 T54 10" stroke="#c9a35c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    </svg>
+    VAGUE THEDON
+  </div>
+  <ul class="nav-links">
+    <li><a href="#produit">Produit</a></li>
+    <li><a href="#details">L'Étoffe</a></li>
+    <li><a href="#histoire">Histoire</a></li>
+  </ul>
+  <div class="nav-actions" id="navActions">
+    <!-- Rempli dynamiquement -->
+  </div>
+</nav>
+
+<section class="hero" id="produit">
+  <div class="corner-deco corner-tl"></div>
+  <div class="corner-deco corner-tr"></div>
+  <div class="hero-text">
+    <div class="eyebrow">Édition Numéro 01 — Pièce Signature</div>
+    <h1>
+      L'<span class="accent">essence</span><br>
+      d'une
+      <svg class="vague-deco" viewBox="0 0 80 30" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 18 Q20 4, 40 15 T75 12" stroke="#c9a35c" stroke-width="4" stroke-linecap="round" fill="none"/>
+      </svg>
+      <br><span class="accent">vague</span> dorée
+    </h1>
+    <p class="hero-desc">Un t-shirt noir d'une pureté absolue, signé d'une vague brodée fil d'or. Coton biologique premium, coupe intemporelle, finition d'orfèvre.</p>
+    <div class="price-row">
+      <span class="price">25€</span>
+      <span class="price-label">TVA Incluse · Livraison Offerte</span>
+    </div>
+    <div class="size-row">
+      <label class="size-label">Taille</label>
+      <div class="sizes">
+        <button class="size-btn" data-size="XS">XS</button>
+        <button class="size-btn" data-size="S">S</button>
+        <button class="size-btn active" data-size="M">M</button>
+        <button class="size-btn" data-size="L">L</button>
+        <button class="size-btn" data-size="XL">XL</button>
+      </div>
+    </div>
+    <div class="cta-row">
+      <button class="btn-primary" onclick="addToCart()">Ajouter au Panier</button>
+      <button class="btn-secondary">Guide des Tailles</button>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="badge">Édition Limitée</div>
+    <div class="product-display">
+      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="tshirtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1a1a1a"/>
+            <stop offset="50%" stop-color="#0a0a0a"/>
+            <stop offset="100%" stop-color="#000"/>
+          </linearGradient>
+          <linearGradient id="goldWave" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#e8c987"/>
+            <stop offset="50%" stop-color="#c9a35c"/>
+            <stop offset="100%" stop-color="#8a6b34"/>
+          </linearGradient>
+          <filter id="shadow"><feGaussianBlur stdDeviation="8"/></filter>
+        </defs>
+        <ellipse cx="300" cy="60" rx="14" ry="14" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+        <path d="M300 75 Q300 95, 285 105 L200 130 Q195 132, 195 138" stroke="#1a1a1a" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M300 75 Q300 95, 315 105 L400 130 Q405 132, 405 138" stroke="#1a1a1a" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <line x1="195" y1="138" x2="405" y2="138" stroke="#1a1a1a" stroke-width="6" stroke-linecap="round"/>
+        <path d="M180 145 Q180 140, 185 138 L240 130 Q250 128, 258 135 Q270 145, 285 148 Q300 150, 315 148 Q330 145, 342 135 Q350 128, 360 130 L415 138 Q420 140, 420 145 L450 200 Q455 210, 450 218 L420 240 Q415 245, 410 245 L405 260 L405 540 Q405 550, 395 552 L205 552 Q195 550, 195 540 L195 260 L190 245 Q185 245, 180 240 L150 218 Q145 210, 150 200 Z" fill="url(#tshirtGrad)" stroke="#222" stroke-width="0.5"/>
+        <path d="M258 135 Q280 158, 300 158 Q320 158, 342 135 Q330 152, 300 152 Q270 152, 258 135 Z" fill="#000" opacity="0.6"/>
+        <g transform="translate(355, 235)">
+          <path d="M-15 8 Q-5 -2, 5 6 T20 4" stroke="url(#goldWave)" stroke-width="5" fill="none" stroke-linecap="round" filter="url(#shadow)"/>
+          <path d="M-15 8 Q-5 -2, 5 6 T20 4" stroke="url(#goldWave)" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path d="M-13 7 Q-5 -1, 5 5" stroke="#f5e2a8" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="details" id="details">
+  <div class="details-grid">
+    <div>
+      <div class="section-eyebrow">L'Étoffe — Le Détail</div>
+      <h2 class="section-title">Une <span class="italic">obsession</span><br>du détail.</h2>
+      <p style="color:rgba(245,239,228,.65);font-size:16px;line-height:1.8;max-width:480px;">Chaque pièce est conçue comme un bijou : tissu sélectionné dans les filatures les plus exigeantes, vague brodée au fil d'or sur métier traditionnel, finitions inspectées à la main.</p>
+      <ul class="feature-list">
+        <li><span class="feature-num">01</span><div class="feature-content"><h3>Coton bio 220 g/m²</h3><p>Filé en Égypte, tissé au Portugal. Toucher peau-de-pêche, tenue impeccable.</p></div></li>
+        <li><span class="feature-num">02</span><div class="feature-content"><h3>Broderie fil d'or</h3><p>Vague signature brodée à la main, fil d'or 24 carats sur substrat de soie.</p></div></li>
+        <li><span class="feature-num">03</span><div class="feature-content"><h3>Coupe intemporelle</h3><p>Tombé étudié, encolure renforcée. Pensé pour traverser les saisons.</p></div></li>
+        <li><span class="feature-num">04</span><div class="feature-content"><h3>Made in France</h3><p>Confectionné dans nos ateliers parisiens. Numéroté, signé, livré dans son écrin.</p></div></li>
+      </ul>
+    </div>
+    <div class="detail-image">
+      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="zoomBg" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#0a0a0a"/>
+            <stop offset="100%" stop-color="#000"/>
+          </radialGradient>
+          <linearGradient id="zoomGold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f5e2a8"/>
+            <stop offset="40%" stop-color="#e8c987"/>
+            <stop offset="70%" stop-color="#c9a35c"/>
+            <stop offset="100%" stop-color="#8a6b34"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="500" fill="url(#zoomBg)"/>
+        <g opacity="0.08">
+          <line x1="0" y1="100" x2="400" y2="100" stroke="#fff" stroke-width="0.3"/>
+          <line x1="0" y1="200" x2="400" y2="200" stroke="#fff" stroke-width="0.3"/>
+          <line x1="0" y1="300" x2="400" y2="300" stroke="#fff" stroke-width="0.3"/>
+          <line x1="0" y1="400" x2="400" y2="400" stroke="#fff" stroke-width="0.3"/>
+          <line x1="100" y1="0" x2="100" y2="500" stroke="#fff" stroke-width="0.3"/>
+          <line x1="200" y1="0" x2="200" y2="500" stroke="#fff" stroke-width="0.3"/>
+          <line x1="300" y1="0" x2="300" y2="500" stroke="#fff" stroke-width="0.3"/>
+        </g>
+        <g transform="translate(200, 250)">
+          <path d="M-130 30 Q-65 -40, 0 20 T130 10" stroke="url(#zoomGold)" stroke-width="32" fill="none" stroke-linecap="round"/>
+          <path d="M-125 25 Q-65 -35, 0 15" stroke="#fff8e0" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.5"/>
+        </g>
+        <path d="M20 20 L20 50 M20 20 L50 20" stroke="#c9a35c" stroke-width="1" opacity="0.5"/>
+        <path d="M380 20 L380 50 M380 20 L350 20" stroke="#c9a35c" stroke-width="1" opacity="0.5"/>
+        <path d="M20 480 L20 450 M20 480 L50 480" stroke="#c9a35c" stroke-width="1" opacity="0.5"/>
+        <path d="M380 480 L380 450 M380 480 L350 480" stroke="#c9a35c" stroke-width="1" opacity="0.5"/>
+      </svg>
+      <div class="label">détail brodé · grossi 4×</div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="histoire">
+  <div class="story-content">
+    <div class="section-eyebrow">L'Histoire</div>
+    <p class="story-quote">Une vague, simple, dorée. Un mouvement figé dans le fil. Le luxe que l'on ne montre pas — celui que l'on porte.</p>
+    <p class="story-author">Manifeste Vague Thedon, 2024</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">
+        <svg class="brand-logo" viewBox="0 0 60 24" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:28px">
+          <path d="M3 14 Q12 4, 24 12 T54 10" stroke="#c9a35c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+        </svg>
+        VAGUE THEDON
+      </div>
+      <p class="footer-tag">L'essentiel doré. Pièce signature confectionnée en France, en édition limitée et numérotée.</p>
+    </div>
+    <div class="footer-col"><h4>Maison</h4><ul><li><a href="#">Notre histoire</a></li><li><a href="#">Savoir-faire</a></li><li><a href="#">Engagement</a></li></ul></div>
+    <div class="footer-col"><h4>Service</h4><ul><li><a href="#">Livraison</a></li><li><a href="#">Retours</a></li><li><a href="#">Guide tailles</a></li><li><a href="#">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Suivre</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">YouTube</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 VAGUE THEDON. Tous droits réservés.</span>
+    <span>Conçu à Paris · Livré dans le monde</span>
+  </div>
+</footer>
+
+<!-- Cart -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h2>Votre Panier</h2>
+    <button class="close-btn" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">Votre panier est vide.</p>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span style="letter-spacing:.2em;text-transform:uppercase;font-size:11px;align-self:center;">Total</span>
+      <span class="total-amount" id="cartTotal">0€</span>
+    </div>
+    <button class="checkout-btn" onclick="openCheckout()">Procéder à la Livraison</button>
+  </div>
+</div>
+
+<!-- Login/Register Modal (clients) -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal small">
+    <button class="modal-close" onclick="closeAuth()">✕</button>
+    <h2>Mon <span class="italic">compte</span></h2>
+    <p class="modal-sub">Connectez-vous ou créez un compte</p>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="setAuthTab('login')">Connexion</button>
+      <button class="auth-tab" id="tabRegister" onclick="setAuthTab('register')">Créer un compte</button>
+      <button class="auth-tab" id="tabAdmin" onclick="setAuthTab('admin')" style="color:var(--or)">◆ Admin</button>
+    </div>
+
+    <!-- Formulaire client (connexion + register) -->
+    <form id="authForm" onsubmit="handleAuth(event)">
+      <div class="form-group full" style="margin-bottom:14px">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" id="authEmail" required placeholder="vous@email.com">
+      </div>
+      <div class="form-group full">
+        <label class="form-label" id="authPwLabel">Code d'accès</label>
+        <input type="password" class="form-input" id="authPassword" required minlength="4" placeholder="Au moins 4 caractères">
+      </div>
+      <div class="auth-error" id="authError"></div>
+      <button type="submit" class="submit-order" id="authSubmit" style="margin-top:24px">Se Connecter</button>
+    </form>
+
+    <!-- Formulaire admin (caché par défaut) -->
+    <form id="adminAuthForm" onsubmit="handleAdminAuth(event)" style="display:none">
+      <div class="form-group full" style="margin-bottom:14px">
+        <label class="form-label">Email Admin</label>
+        <input type="email" class="form-input" id="adminEmail" placeholder="email admin">
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Mot de passe</label>
+        <input type="password" class="form-input" id="adminPassword" placeholder="••••••••">
+      </div>
+      <div class="auth-error" id="adminAuthError"></div>
+      <button type="submit" class="submit-order" id="adminAuthSubmit" style="margin-top:24px;background:#1a1a1a;border:1px solid var(--or);color:var(--or)">Accéder au panneau Admin</button>
+    </form>
+
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal" id="checkoutContent">
+    <button class="modal-close" onclick="closeCheckout()">✕</button>
+    <h2>Adresse de <span class="italic">livraison</span></h2>
+    <p class="modal-sub">Renseignez vos coordonnées pour finaliser votre commande</p>
+    <form id="checkoutForm" onsubmit="submitOrder(event)">
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Prénom</label><input type="text" class="form-input" id="firstName" required placeholder="Jean"></div>
+        <div class="form-group"><label class="form-label">Nom</label><input type="text" class="form-input" id="lastName" required placeholder="Dupont"></div>
+        <div class="form-group full"><label class="form-label">Email</label><input type="email" class="form-input" id="orderEmail" required placeholder="vous@email.com"></div>
+        <div class="form-group full"><label class="form-label">Téléphone</label><input type="tel" class="form-input" id="phone" required placeholder="+33 6 00 00 00 00"></div>
+        <div class="form-group full"><label class="form-label">Adresse</label><input type="text" class="form-input" id="address" required placeholder="12 rue de la Paix"></div>
+        <div class="form-group"><label class="form-label">Code Postal</label><input type="text" class="form-input" id="zip" required placeholder="75001"></div>
+        <div class="form-group"><label class="form-label">Ville</label><input type="text" class="form-input" id="city" required placeholder="Paris"></div>
+        <div class="form-group full">
+          <label class="form-label">Pays</label>
+          <select class="form-select" id="country" required>
+            <option value="">Sélectionnez un pays</option>
+            <option value="France">France</option>
+            <option value="Belgique">Belgique</option>
+            <option value="Suisse">Suisse</option>
+            <option value="Luxembourg">Luxembourg</option>
+            <option value="Allemagne">Allemagne</option>
+            <option value="Italie">Italie</option>
+            <option value="Espagne">Espagne</option>
+            <option value="Royaume-Uni">Royaume-Uni</option>
+            <option value="Pays-Bas">Pays-Bas</option>
+            <option value="Portugal">Portugal</option>
+            <option value="Canada">Canada</option>
+            <option value="États-Unis">États-Unis</option>
+            <option value="Maroc">Maroc</option>
+            <option value="Algérie">Algérie</option>
+            <option value="Tunisie">Tunisie</option>
+            <option value="Sénégal">Sénégal</option>
+            <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+      </div>
+      <div class="order-summary">
+        <div class="order-summary-row"><span>T-shirt Vague Thedon</span><span id="summaryQty">×1</span></div>
+        <div class="order-summary-row"><span style="color:rgba(245,239,228,.5)">Livraison</span><span style="color:var(--or)">Offerte</span></div>
+        <div class="order-summary-row total"><span>Total</span><span id="summaryTotal">25€</span></div>
+      </div>
+      <button type="submit" class="submit-order" id="submitOrderBtn">Confirmer la Commande</button>
+    </form>
+  </div>
+</div>
+
+<!-- Admin Panel -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-header">
+    <div class="admin-header-left">
+      <span class="admin-badge">Admin</span>
+      <span class="admin-title">VAGUE THEDON — Tableau de bord</span>
+    </div>
+    <div class="admin-actions">
+      <button class="admin-btn" onclick="refreshAdmin()">Actualiser</button>
+      <button class="admin-btn" onclick="exportOrders()">Exporter CSV</button>
+      <button class="admin-btn" onclick="closeAdmin()">Fermer</button>
+    </div>
+  </div>
+  <div class="admin-content">
+    <div class="admin-stats" id="adminStats"></div>
+    <div class="admin-section">
+      <div class="admin-section-header">
+        <h3>Commandes <span class="italic">reçues</span></h3>
+        <input type="text" class="search-box" id="orderSearch" placeholder="Rechercher (nom, email, ville...)" oninput="renderOrders()">
+      </div>
+      <div id="ordersList"></div>
+    </div>
+    <div class="admin-section">
+      <div class="admin-section-header">
+        <h3>Comptes <span class="italic">utilisateurs</span></h3>
+      </div>
+      <div id="usersList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Ajouté au panier</div>
+
+<script>
+const TOKEN_KEY='vt_token';
+let currentToken=null;
+let isAdmin=false;
+let userEmail=null;
+let allOrders=[];
+let authMode='login';
+
+function token(){return currentToken||localStorage.getItem(TOKEN_KEY)}
+function setToken(t){currentToken=t;localStorage.setItem(TOKEN_KEY,t)}
+function clearToken(){currentToken=null;localStorage.removeItem(TOKEN_KEY)}
+
+async function api(path,opts={}){
+  const headers={'Content-Type':'application/json',...(opts.headers||{})};
+  const t=token();
+  if(t)headers.Authorization='Bearer '+t;
+  const res=await fetch(path,{...opts,headers});
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok)throw new Error(data.error||'Erreur '+res.status);
+  return data;
+}
+
+// ===== NAV (rendu dynamique) =====
+function renderNav(){
+  const el=document.getElementById('navActions');
+  if(isAdmin){
+    el.innerHTML=`
+      <button class="icon-btn admin" onclick="openAdmin()">◆ Admin</button>
+      <div class="user-pill"><span class="pill-name">Admin</span><span class="pill-logout" onclick="logout()">✕</span></div>
+      <button class="icon-btn" onclick="toggleCart()"><span>Panier</span><span class="cart-count" id="cartCount">0</span></button>
+    `;
+  }else if(userEmail){
+    el.innerHTML=`
+      <div class="user-pill"><span class="pill-name">${userEmail.split('@')[0]}</span><span class="pill-logout" onclick="logout()">✕</span></div>
+      <button class="icon-btn" onclick="toggleCart()"><span>Panier</span><span class="cart-count" id="cartCount">0</span></button>
+    `;
+  }else{
+    el.innerHTML=`
+      <button class="icon-btn" onclick="openAuth()">Connexion</button>
+      <button class="icon-btn" onclick="toggleCart()"><span>Panier</span><span class="cart-count" id="cartCount">0</span></button>
+    `;
+  }
+  updateCart();
+}
+
+// ===== AUTH CLIENT =====
+function openAuth(){document.getElementById('authModal').classList.add('open')}
+function closeAuth(){document.getElementById('authModal').classList.remove('open');document.getElementById('authError').textContent='';document.getElementById('authForm').reset()}
+function setAuthTab(mode){
+  authMode=mode;
+  document.getElementById('tabLogin').classList.toggle('active',mode==='login');
+  document.getElementById('tabRegister').classList.toggle('active',mode==='register');
+  document.getElementById('tabAdmin').classList.toggle('active',mode==='admin');
+  const adminMode=(mode==='admin');
+  document.getElementById('authForm').style.display=adminMode?'none':'flex';
+  document.getElementById('authForm').style.flexDirection='column';
+  document.getElementById('adminAuthForm').style.display=adminMode?'flex':'none';
+  document.getElementById('adminAuthForm').style.flexDirection='column';
+  if(!adminMode){
+    document.getElementById('authSubmit').textContent=mode==='login'?'Se Connecter':'Créer Mon Compte';
+    document.getElementById('authPwLabel').textContent=mode==='login'?'Code d\'accès':'Choisir un code d\'accès';
+  }
+  document.getElementById('authError').textContent='';
+  document.getElementById('adminAuthError').textContent='';
+}
+async function handleAuth(e){
+  e.preventDefault();
+  const btn=document.getElementById('authSubmit');
+  const errEl=document.getElementById('authError');
+  errEl.textContent='';
+  btn.disabled=true;
+  try{
+    const data=await api(authMode==='login'?'/api/login':'/api/register',{
+      method:'POST',
+      body:JSON.stringify({
+        email:document.getElementById('authEmail').value,
+        password:document.getElementById('authPassword').value
+      })
+    });
+    setToken(data.token);
+    userEmail=data.email;
+    isAdmin=false;
+    closeAuth();
+    renderNav();
+    showToast(authMode==='login'?'Bienvenue':'Compte créé');
+  }catch(err){
+    errEl.textContent=err.message;
+  }finally{btn.disabled=false}
+}
+
+// ===== AUTH ADMIN =====
+function openAdminAuth(){openAuth();setAuthTab('admin')}
+function closeAdminAuth(){closeAuth()}
+async function handleAdminAuth(e){
+  e.preventDefault();
+  const btn=document.getElementById('adminAuthSubmit');
+  const errEl=document.getElementById('adminAuthError');
+  errEl.textContent='';
+  btn.disabled=true;
+  try{
+    const data=await api('/api/admin/login',{
+      method:'POST',
+      body:JSON.stringify({
+        email:document.getElementById('adminEmail').value,
+        password:document.getElementById('adminPassword').value
+      })
+    });
+    setToken(data.token);
+    userEmail=data.email;
+    isAdmin=true;
+    closeAuth();
+    renderNav();
+    showToast('◆ Admin connecté');
+    openAdmin();
+  }catch(err){
+    errEl.textContent=err.message;
+  }finally{btn.disabled=false}
+}
+
+function logout(){
+  if(confirm('Se déconnecter ?')){
+    clearToken();
+    userEmail=null;
+    isAdmin=false;
+    renderNav();
+  }
+}
+
+async function checkSession(){
+  if(!token())return;
+  try{
+    const me=await api('/api/me');
+    userEmail=me.email;
+    isAdmin=me.isAdmin;
+    renderNav();
+  }catch{
+    clearToken();
+  }
+}
+
+// ===== ADMIN PANEL =====
+async function openAdmin(){
+  if(!isAdmin)return;
+  document.getElementById('adminPanel').classList.add('open');
+  document.body.style.overflow='hidden';
+  await refreshAdmin();
+}
+function closeAdmin(){
+  document.getElementById('adminPanel').classList.remove('open');
+  document.body.style.overflow='';
+}
+async function refreshAdmin(){
+  try{
+    const [stats,orders,users]=await Promise.all([
+      api('/api/admin/stats'),
+      api('/api/admin/orders'),
+      api('/api/admin/users')
+    ]);
+    allOrders=orders;
+    renderStats(stats);
+    renderOrders();
+    renderUsers(users);
+  }catch(e){showToast('Erreur: '+e.message)}
+}
+function renderStats(s){
+  document.getElementById('adminStats').innerHTML=`
+    <div class="stat-card"><div class="stat-label">Commandes Totales</div><div class="stat-value">${s.totalOrders}</div></div>
+    <div class="stat-card"><div class="stat-label">Aujourd'hui</div><div class="stat-value">${s.ordersToday}</div></div>
+    <div class="stat-card"><div class="stat-label">Chiffre d'Affaires</div><div class="stat-value">${(s.revenueCents/100).toFixed(0)}<span class="stat-suffix">€</span></div></div>
+    <div class="stat-card"><div class="stat-label">Clients Inscrits</div><div class="stat-value">${s.totalUsers}</div></div>
+  `;
+}
+function renderOrders(){
+  const search=(document.getElementById('orderSearch')?.value||'').toLowerCase().trim();
+  const filtered=search?allOrders.filter(o=>{
+    return `${o.first_name} ${o.last_name} ${o.email} ${o.city} ${o.country} ${o.order_num} ${o.address} ${o.phone}`.toLowerCase().includes(search);
+  }):allOrders;
+  const list=document.getElementById('ordersList');
+  if(filtered.length===0){list.innerHTML='<div class="orders-empty">Aucune commande pour le moment.</div>';return}
+  list.innerHTML=filtered.map(o=>{
+    const d=new Date(o.created_at);
+    const dateStr=d.toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'})+' · '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+    return `
+      <div class="order-card">
+        <div class="order-card-top">
+          <div>
+            <div class="order-id">N° ${o.order_num}</div>
+            <div class="order-date" style="margin-top:6px">${dateStr}</div>
+          </div>
+          <div class="order-total">${(o.total_cents/100).toFixed(0)}€</div>
+        </div>
+        <div class="order-grid">
+          <div class="order-info-block"><h4>Client</h4><p><strong>${o.first_name} ${o.last_name}</strong></p><p><a href="mailto:${o.email}">${o.email}</a></p><p><a href="tel:${o.phone}">${o.phone}</a></p></div>
+          <div class="order-info-block"><h4>Livraison</h4><p>${o.address}</p><p>${o.zip} ${o.city}</p><p><strong>${o.country}</strong></p></div>
+          <div class="order-info-block"><h4>Article</h4><p><strong>T-shirt Vague Thedon</strong></p><p>Taille ${o.size} · Noir</p><p style="color:var(--or)">${(o.total_cents/100).toFixed(0)}€</p></div>
+        </div>
+        <div class="order-actions">
+          <button class="order-action-btn" onclick="copyOrder('${o.order_num}')">Copier infos</button>
+          <button class="order-action-btn" onclick="window.location.href='mailto:${o.email}?subject=Votre commande ${o.order_num}'">Email</button>
+          <button class="order-action-btn danger" onclick="deleteOrder('${o.order_num}')">Supprimer</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+function renderUsers(users){
+  const list=document.getElementById('usersList');
+  if(users.length===0){list.innerHTML='<div class="orders-empty">Aucun compte inscrit.</div>';return}
+  list.innerHTML=`<table class="users-table"><thead><tr><th>Email</th><th>Date d'inscription</th></tr></thead><tbody>${users.map(u=>`<tr><td>${u.email}</td><td>${new Date(u.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'})}</td></tr>`).join('')}</tbody></table>`;
+}
+function copyOrder(num){
+  const o=allOrders.find(x=>x.order_num===num);
+  if(!o)return;
+  const text=`Commande VAGUE THEDON N° ${o.order_num}\nDate: ${new Date(o.created_at).toLocaleString('fr-FR')}\n\nClient: ${o.first_name} ${o.last_name}\nEmail: ${o.email}\nTéléphone: ${o.phone}\n\nAdresse:\n${o.address}\n${o.zip} ${o.city}\n${o.country}\n\nArticle: T-shirt Vague Thedon — Taille ${o.size} — Noir\nTotal: ${(o.total_cents/100).toFixed(0)}€`;
+  navigator.clipboard.writeText(text).then(()=>showToast('Infos copiées'));
+}
+async function deleteOrder(num){
+  if(!confirm('Supprimer cette commande ?'))return;
+  try{await api('/api/admin/orders/'+num,{method:'DELETE'});showToast('Supprimée');refreshAdmin()}catch(e){showToast('Erreur: '+e.message)}
+}
+function exportOrders(){
+  if(allOrders.length===0){showToast('Rien à exporter');return}
+  const headers=['N°','Date','Prénom','Nom','Email','Téléphone','Adresse','CP','Ville','Pays','Taille','Total (€)'];
+  const rows=allOrders.map(o=>[o.order_num,new Date(o.created_at).toLocaleString('fr-FR'),o.first_name,o.last_name,o.email,o.phone,o.address,o.zip,o.city,o.country,o.size,(o.total_cents/100).toFixed(2)]);
+  const csv=[headers,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`commandes_${new Date().toISOString().slice(0,10)}.csv`;a.click();
+  showToast('Export téléchargé');
+}
+
+// ===== SHOP =====
+let selectedSize='M';
+document.querySelectorAll('.size-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedSize=btn.dataset.size;
+  });
+});
+
+let cart=[];
+const PRICE=25;
+
+function toggleCart(){
+  document.getElementById('cartDrawer').classList.toggle('open');
+  document.getElementById('cartOverlay').classList.toggle('open');
+}
+function addToCart(){
+  cart.push({id:Date.now(),size:selectedSize,price:PRICE});
+  updateCart();
+  showToast('Ajouté au panier');
+}
+function removeItem(id){cart=cart.filter(i=>i.id!==id);updateCart()}
+function updateCart(){
+  const cc=document.getElementById('cartCount');
+  if(cc)cc.textContent=cart.length;
+  const itemsEl=document.getElementById('cartItems');
+  const footerEl=document.getElementById('cartFooter');
+  if(!itemsEl)return;
+  if(cart.length===0){itemsEl.innerHTML='<p class="cart-empty">Votre panier est vide.</p>';footerEl.style.display='none';return}
+  itemsEl.innerHTML=cart.map(item=>`
+    <div class="cart-item">
+      <div class="cart-item-img"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" fill="#000"/><path d="M22 22 L30 18 Q35 17, 38 20 Q40 23, 40 23 Q40 23, 42 20 Q45 17, 50 18 L58 22 L62 30 L58 32 L58 65 L22 65 L22 32 L18 30 Z" fill="#0a0a0a" stroke="#222" stroke-width="0.5"/><g transform="translate(48, 32)"><path d="M-3 1.5 Q-1 -0.5, 1 1 T4 0.5" stroke="#c9a35c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g></svg></div>
+      <div class="cart-item-info"><h4>T-shirt Vague Thedon</h4><div class="meta">Taille ${item.size} · Noir</div><div class="price">${item.price}€</div></div>
+      <button class="remove-item" onclick="removeItem(${item.id})">Retirer</button>
+    </div>
+  `).join('');
+  document.getElementById('cartTotal').textContent=cart.reduce((s,i)=>s+i.price,0)+'€';
+  footerEl.style.display='block';
+}
+
+function openCheckout(){
+  if(cart.length===0)return;
+  document.getElementById('summaryQty').textContent='×'+cart.length;
+  document.getElementById('summaryTotal').textContent=cart.reduce((s,i)=>s+i.price,0)+'€';
+  if(userEmail&&!isAdmin)document.getElementById('orderEmail').value=userEmail;
+  toggleCart();
+  document.getElementById('checkoutModal').classList.add('open');
+}
+function closeCheckout(){
+  document.getElementById('checkoutModal').classList.remove('open');
+  setTimeout(()=>{
+    if(!document.getElementById('checkoutContent').querySelector('#checkoutForm'))location.reload();
+  },400);
+}
+
+async function submitOrder(e){
+  e.preventDefault();
+  const btn=document.getElementById('submitOrderBtn');
+  btn.disabled=true;btn.textContent='Envoi...';
+  try{
+    const data=await api('/api/order',{
+      method:'POST',
+      body:JSON.stringify({
+        firstName:document.getElementById('firstName').value,
+        lastName:document.getElementById('lastName').value,
+        email:document.getElementById('orderEmail').value,
+        phone:document.getElementById('phone').value,
+        address:document.getElementById('address').value,
+        zip:document.getElementById('zip').value,
+        city:document.getElementById('city').value,
+        country:document.getElementById('country').value,
+        size:cart[0].size
+      })
+    });
+    document.getElementById('checkoutContent').innerHTML=`
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+      <div class="confirmation">
+        <div class="confirmation-icon">✓</div>
+        <h2>Commande <span class="italic">enregistrée</span></h2>
+        <p>Merci, votre commande est bien reçue.</p>
+        <div class="order-num">N° ${data.orderNum}</div>
+        <p style="font-size:14px;margin-bottom:24px">Vous allez être redirigé vers <strong style="color:var(--or)">PayPal</strong> pour finaliser le paiement de <strong style="color:var(--or)">${cart.reduce((s,i)=>s+i.price,0)}€</strong>...</p>
+        <div style="width:40px;height:40px;border:2px solid var(--or);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 24px"></div>
+        <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+        <p style="font-size:11px;color:rgba(245,239,228,.4)">Si la redirection ne se fait pas automatiquement :<br><a href="https://paypal.me/DavidYoussef503/${data.total}" style="color:var(--or)">Cliquez ici pour payer sur PayPal</a></p>
+      </div>
+    `;
+    // Redirection PayPal avec le montant
+    const total=cart.reduce((s,i)=>s+i.price,0);
+    cart=[];updateCart();
+    setTimeout(()=>{
+      window.location.href=`https://paypal.me/DavidYoussef503/${total}EUR`;
+    },1500);
+  }catch(err){
+    showToast('Erreur: '+err.message);
+    btn.disabled=false;btn.textContent='Confirmer la Commande';
+  }
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+// INIT
+renderNav();
+checkSession();
+</script>
+</body>
+</html>
